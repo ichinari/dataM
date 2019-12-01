@@ -1,0 +1,1182 @@
+//LP
+
+
+$breakpoints: (
+    'sm': 'screen and (max-width: 414px)',
+    'md': 'screen and (max-width: 768px)',
+    'lg': 'screen and (max-width: 1000px)',
+    'xl': 'screen and (max-width: 1200px)',
+) !default;
+
+
+@mixin mq($breakpoint: sm) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+
+
+// base
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-size: 1.6em;
+    font-family: "Noto Sans JP";
+    list-style: none;
+    text-decoration: none;
+    @include mq(){
+        font-size: 1rem;
+    }
+}
+
+
+#header{
+    width: 100%;
+    background: #2a64ff;
+    color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 5;
+}
+
+#main{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer{
+    width: 100%;
+    background: #2a64ff;
+    color: #fff;
+    padding: 40px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    @include mq(){
+       width: 100%;
+        padding: 10px;
+    }
+}
+
+a{
+    color: #fff;
+    display: block;
+    text-decoration: none;
+}
+
+a:hover{
+    color: red;
+    cursor: pointer;
+}
+
+// header
+
+.header{
+    &-logo{
+        font-size: 5rem;
+        padding: 20px;
+        @include mq(){
+            font-size: 2.5rem;
+            padding: 10px;
+        }
+    }
+    &-nav{
+        @include mq(){
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, .85);
+            padding-top: 50px;
+            position: absolute;
+            top: 0;
+            right: -100%;
+            display: block;
+            &.active {
+                transition: .5s;
+                transform: translateX(-100%);
+                z-index: 8;
+            }
+            &.close {
+                transition: .5s;
+                transform: translateX(100%);
+                z-index: 8;
+            }
+        }
+    }
+    &-trigger{
+        display: none;
+        @include mq() {
+            width: 40px;
+            height: 30px;
+            box-sizing: border-box;
+            position: relative;
+            transition: all .4s;
+            z-index: 9;
+            display: inline-block;
+        }
+        span {
+            width: 100%;
+            height: 4px;
+            background-color: #484848;
+            position: absolute;
+            left: -30px;
+            border-radius: 4px;
+            display: inline-block;
+            box-sizing: border-box;
+            transition: all .4s;
+            &:nth-of-type(1) { 
+                top: 0;
+            }
+            &:nth-of-type(2) {
+                top: 14px;
+            }
+            &:nth-of-type(3) {
+                bottom: 0;
+            }
+        }
+        &.active span {
+            &:nth-of-type(1) {
+                transform: translateY(12px) rotate(-45deg);
+            }
+            &:nth-of-type(2) {
+                opacity: 0;
+            }
+            &:nth-of-type(3) {
+                transform: translateY(-15px) rotate(45deg);
+            }
+        }
+        &.close span {
+            &:nth-of-type(1) {
+                transform: translateY(0px) rotate(0deg);
+            }
+            &:nth-of-type(2) {
+                opacity: 1;
+            }
+            &:nth-of-type(3) {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+    }
+    &-menu{
+        display: flex;
+        align-items: center;
+        @include mq(){
+            display: block;
+            text-align: center;
+        }
+    }
+    &-item{
+        font-size: 2rem;
+        margin-right: 40px;
+        @include mq(){
+            margin-right: 0px;
+        }
+    }
+    &-link{
+        @include mq(){
+            color: #000;
+            margin: 50px 0;
+        }
+    }
+    &-contact{
+        background: #01c11e;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        @include mq(){
+            background: none;
+
+        }
+    }
+}
+
+.top{
+    &-container{
+        width: 100%;
+        height: 700px;
+        background-image: url(../images/hero.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        @include mq(){
+            width: 100%;
+            height: 600px;
+        }
+    }
+}
+
+.hero{
+    &-text{
+        background: #000;
+        color: #fff;
+        font-size: 6rem;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1;
+        @include mq(){
+            background: none;
+            font-size: 2.3rem;
+            animation: fadeInLeft 3s;
+        }
+    }
+    &-text1{
+        position: absolute;
+        top: 400px;
+        left: 150px;
+        @include mq(){
+            top: 270px;
+            left: 10px;
+        }
+    }
+    &-text2{
+        position: absolute;
+        top: 490px;
+        left: 150px;
+        @include mq(){
+            top: 300px;
+            left: 10px;
+        }
+    }
+}
+
+@-webkit-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.middle-container{
+    width: 100%;
+}
+
+// infomation
+
+.infomation{
+    &-area{
+        width: 100%;
+        height: 500px;
+        padding: 50px;
+        margin: 80px 0;
+        box-sizing: border-box;
+        @include mq(){
+            height: auto;
+            padding: 10px;
+            margin: 50px 0;
+            box-sizing: border-box;
+        }
+    }
+    &-logo{
+        width: 20%;
+        font-size: 5rem;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        text-align: center;
+        background-image: linear-gradient(135deg, #2a64ff 20px, transparent 0),
+            linear-gradient(-45deg, #2a64ff 20px, transparent 0);
+        @include mq(){
+            width: 40%;
+            font-size: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    &-box{
+        width: 650px;
+        height: 200px;
+        background: white;
+        color: #000;
+        font-size: 1.5rem;
+        padding: 25px;
+        margin: 0 auto;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 8px #000;
+        overflow-y: scroll;
+        @include mq(){
+            width: 60%;
+            height: 300px;
+            margin: 0 auto;
+
+        }
+    }
+    &-news{
+        color: #000;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px dashed #a39e9e;
+    }
+    &-date{
+        margin:0 20px;
+        @include mq(){
+            color: #f00;
+            margin: 0 60px;
+        }
+    }
+    &-past{
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2a64ff;
+        margin-top: 40px;
+        text-align: center;
+        display: block;
+        @include mq(){
+            font-size: 1.5rem;
+            margin-top: 40px;
+            display: block;
+        }
+    }
+}
+
+// service
+
+.service{
+    &-area{
+        width: 100%;
+        background: rgba(148, 214, 255, 0.26);
+        padding: 50px;
+        margin-bottom: 80px;
+        box-sizing: border-box;
+        @include mq(){
+            width: 100%;
+            padding: 40px 10px 10px 10px;
+            margin: 30px 0;
+            box-sizing: border-box;
+        }
+    }
+    &-logo{
+        width: 30%;
+        font-size: 5rem;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        text-align: center;
+        background-image: linear-gradient(135deg, #2a64ff 20px, transparent 0),
+            linear-gradient(-45deg, #2a64ff 20px, transparent 0);
+        @include mq(){
+            width: 50%;
+            font-size: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+    }
+    &-box{
+        width: 95%;
+        background: white;
+        color: #000;
+        font-size: 1.5rem;
+        padding: 25px;
+        margin: 0 auto;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        @include mq(){
+            width: 80%;
+            color: #000;
+            font-size: 1rem;
+            padding: 10px;
+            margin: 0 auto;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+        &-explanation{
+            width: 100%;
+            display: flex;
+            @include mq(){
+               display: block;
+            }
+            &_text{
+                width: 100%;
+                color: #535353;
+                font-size: 1.5rem;
+                font-weight: bold;
+                line-height: 35px;
+                padding: 20px;
+                margin-right: 5px;
+                text-align: left;
+                box-sizing: border-box;
+                @include mq(){
+                    width: 100%;
+                    font-size: 1.3rem;
+                    padding: 10px;
+                    margin: 0;
+                    display: block;
+                }
+            }
+            &_icons{
+                width: 50%;
+                margin-left: 5px;
+                box-sizing: border-box;
+                position: relative;
+                @include mq(){
+                    width: 50%;
+                    position: relative;
+                    display: block;
+                }
+                & .fa-border{
+                    border-color: #6c6c6c;
+                }
+                & .icon{
+                    font-size: 5rem;
+                    padding: 10px;
+                    border-radius: 30%;
+                    @include mq(){
+                        font-size: 3rem;
+                        padding: 5px;
+                        border-radius: 30%;
+                    }
+                    &:nth-child(1){
+                        position: absolute;
+                        top: 30px;
+                        left: 70px;
+                        @include mq(){
+                            position: absolute;
+                            top: 10px;
+                            left: 10px;
+                        }
+                    }
+                    &:nth-child(2){
+                        position: absolute;
+                        top: 30px;
+                        left: 200px;
+                        @include mq(){
+                            position: absolute;
+                            top: 10px;
+                            left: 90px;
+                        }
+                    }
+                    &:nth-child(3){
+                        position: absolute;
+                        top: 30px;
+                        left: 340px;
+                        @include mq(){
+                            position: absolute;
+                            top: 10px;
+                            left: 180px;
+                        }
+                    }
+                    &:nth-child(4){
+                        position: absolute;
+                        top: 130px;
+                        left: 120px;
+                        @include mq(){
+                            position: absolute;
+                            top: 80px;
+                            left: 40px;
+                        }
+                    }
+                    &:nth-child(5){
+                        position: absolute;
+                        top: 130px;
+                        left: 260px;
+                        @include mq(){
+                            position: absolute;
+                            top: 80px;
+                            left: 130px;
+                        }
+                    }
+                }
+            }
+        }
+        &-solid{
+            width: 35%;
+            height: 65px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2a64ff;
+            padding: 5px;
+            margin: 40px auto 10px;
+            border: 1px solid #2a64ff;
+            box-sizing: border-box;
+            text-align: center;
+            @include mq(){
+                width: 100%;
+                margin: 150px auto 10px;
+            }
+            &:hover{
+                background: #2a64ff;
+            }
+            &:hover a{
+                color: #fff;
+                background-image: linear-gradient(-45deg, #fff 10px, transparent 0);
+            }
+            &-jump{
+                width: 100%;
+                color: #2a64ff;
+                padding: 1px;
+                line-height: 50px;
+                text-align: center;
+                box-sizing: border-box;
+                display: block;
+                background-image: linear-gradient(-45deg, #2a64ff 10px, transparent 0);
+            }
+        }
+    }
+}
+
+// points
+
+.points{
+    &-area{
+        width: 100%;
+        padding: 50px;
+        margin-bottom: 80px;
+        box-sizing: border-box;
+        @include mq(){
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 30px;
+
+        }
+    }
+    &-logo{
+        width: 60%;
+        font-size: 5rem;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        text-align: center;
+        background-image: linear-gradient(135deg, #2a64ff 20px, transparent 0),
+            linear-gradient(-45deg, #2a64ff 20px, transparent 0);
+        @include mq(){
+            width: 90%;
+            margin: 0 auto 120px;
+            font-size: 2rem;
+        }
+    }
+    &-box{
+        width: 90%;
+        height: 250px;
+        padding: 50px;
+        margin: 30px auto;
+        display: flex;
+        @include mq(){
+            width: 90%;
+            height: auto;
+            padding: 10px;
+            margin: 10px auto;
+            display: block;
+        }
+        &-item1{
+            width: 40%;
+            position: relative;
+            @include mq(){
+                width: 100%;
+            }
+            &-circle1{
+                width: 80%;
+                border-radius: 50%;
+                position: absolute;
+                top: -60px;
+                @include mq(){
+                    width: 40%;
+                    height: 100px;
+                    position: absolute;
+                    top: -110px;
+                    left: -30px;
+                }
+            }
+            &-circle2{
+                width: 80%;
+                height: 350px;
+                border-radius: 50%;
+                position: absolute;
+                top: -60px;
+                @include mq(){
+                    width: 40%;
+                    height: 100px;
+                    position: absolute;
+                    top: -520px;
+                    left: 75px;
+                }
+            }
+            &-circle3{
+                width: 80%;
+                height: 350px;
+                border-radius: 50%;
+                position: absolute;
+                top: -60px;
+                @include mq(){
+                    width: 40%;
+                    height: 100px;
+                    position: absolute;
+                    top: -840px;
+                    left: 180px;
+                }
+            }
+        }
+        &-item2{
+            width: 70%;
+            padding: 20px;
+            box-sizing: border-box;
+            @include mq(){
+                width: 100%;
+                font-size: 2rem;
+                padding: 10px;
+            }
+            &-title{
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+                padding-bottom: 10px;
+                margin-bottom: 30px;
+                border-bottom: 2px solid #2a64ff;
+                @include mq(){
+                    width: 100%;
+                    font-size: 1rem;
+                    padding-bottom: 10px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }    
+            }
+            & p{
+                font-size: 1.7rem;
+                line-height: 30px;
+                letter-spacing: 2px;
+                @include mq(){
+                    font-size: 1rem;
+                    margin-bottom: 20px;
+                }  
+            }
+        }
+    }
+    &-use{
+        color: #000;
+    }
+}
+
+// customer
+
+.customer{
+    &-area{
+        width: 100%;
+        background: rgba(148, 214, 255, 0.26);
+        padding: 50px;
+        margin-bottom: 80px;
+        box-sizing: border-box;
+        @include mq(){
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+    }
+    &-logo{
+        width: 25%;
+        font-size: 5rem;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        text-align: center;
+        background-image: linear-gradient(135deg, #2a64ff 20px, transparent 0),
+            linear-gradient(-45deg, #2a64ff 20px, transparent 0);
+        @include mq(){
+            width: 50%;
+            font-size: 2rem;
+            padding: 10px;
+        }
+    }
+    &-box{
+        width: 90%;
+        background: white;
+        color: #000;
+        font-size: 1.5rem;
+        padding: 25px;
+        margin: 0 auto;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        @include mq(){
+            width: 90%;
+            padding: 10px;
+        }
+    }
+    &-box1{
+        width: 50%;
+        height: 600px;
+        padding: 25px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        position: relative;
+        @include mq(){
+            width: 100%;
+            height: 420px;
+            padding: 10px;
+            display: block;
+        }
+        &-img{
+            width: 80%;
+            height: 50%;
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            @include mq(){
+                width: 100%;
+                height: 150px;
+                position: absolute;
+                top: 0px;
+                left: 1px;
+            }
+        }
+        &-name{
+            width: 482px;
+            background: #2a64ff;
+            color: #fff;
+            font-size: 1.8rem;
+            padding: 10px;
+            position: absolute;
+            top: 310px;
+            left: 50px;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                font-size: 1rem;
+                position: absolute;
+                top: 150px;
+                left: 1px;
+            }
+        }
+        &-text{
+            font-size: 1.7rem;
+            position: absolute;
+            top: 390px;
+            left: 80px;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                height: 30px;
+                font-size: 1rem;
+                position: absolute;
+                top: 220px;
+                left: 10px;
+            }
+        }
+    }
+    &-box2{
+        width: 50%;
+        height: 600px;
+        padding: 25px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        position: relative;
+        @include mq(){
+            width: 100%;
+            height: 330px;
+            padding: 10px;
+            display: block;
+        }
+        &-img{
+            width: 80%;
+            height: 50%;
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            @include mq(){
+                width: 100%;
+                height: 150px;
+                position: absolute;
+                top: 0px;
+                left: 1px;
+            }
+        }
+        &-name{
+            width: 482px;
+            background: #2a64ff;
+            color: #fff;
+            font-size: 1.8rem;
+            padding: 10px;
+            position: absolute;
+            top: 310px;
+            left: 50px;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                font-size: 1rem;
+                position: absolute;
+                top: 150px;
+                left: 1px;
+            }
+        }
+        &-text{
+            font-size: 1.7rem;
+            position: absolute;
+            top: 390px;
+            left: 80px;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                height: 30px;
+                font-size: 1rem;
+                position: absolute;
+                top: 220px;
+                left: 10px;
+            }
+        }
+    }
+    &-box3{
+        width: 50%;
+        height: 600px;
+        padding: 25px;
+        box-sizing: border-box;
+        padding: 25px;
+        box-sizing: border-box;
+        position: relative;
+        @include mq(){
+            width: 100%;
+            height: 400px;
+            padding: 10px;
+            display: block;
+        }
+        &-img{
+            width: 80%;
+            height: 50%;
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            @include mq(){
+                width: 100%;
+                height: 150px;
+                position: absolute;
+                top: 0px;
+                left: 1px;
+            }
+        }
+        &-name{
+            width: 482px;
+            background: #2a64ff;
+            color: #fff;
+            font-size: 1.8rem;
+            padding: 10px;
+            position: absolute;
+            top: 310px;
+            left: 50px;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                font-size: 1rem;
+                position: absolute;
+                top: 150px;
+                left: 1px;
+            }
+        }
+        &-text{
+            font-size: 1.7rem;
+            position: absolute;
+            top: 390px;
+            left: 80px;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                height: 30px;
+                font-size: 1rem;
+                position: absolute;
+                top: 220px;
+                left: 10px;
+            }
+        }
+    }
+    &-box4{
+        width: 50%;
+        height: 600px;
+        padding: 25px;
+        box-sizing: border-box;
+        position: relative;
+        @include mq(){
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            display: block;
+        }
+        &-img{
+            width: 80%;
+            height: 50%;
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            @include mq(){
+                width: 100%;
+                height: 150px;
+                position: absolute;
+                top: 0px;
+                left: 1px;
+            }
+        }
+        &-name{
+            width: 482px;
+            background: #2a64ff;
+            color: #fff;
+            font-size: 1.8rem;
+            padding: 10px;
+            position: absolute;
+            top: 310px;
+            left: 50px;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                font-size: 1rem;
+                position: absolute;
+                top: 150px;
+                left: 1px;
+            }
+        }
+        &-text{
+            font-size: 1.7rem;
+            position: absolute;
+            top: 390px;
+            left: 80px;
+            line-height: 20px;
+            @include mq(){
+                width: 100%;
+                height: 30px;
+                font-size: 1rem;
+                position: absolute;
+                top: 220px;
+                left: 10px;
+            }
+        }
+    }
+}
+
+// contact
+
+.contact{
+    &-area{
+        width: 100%;
+        padding: 50px;
+        padding-bottom: 0;
+        margin-bottom: 80px;
+        box-sizing: border-box;
+        text-align: center;
+        @include mq(){
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 30px;
+
+        }
+    }
+    &-logo{
+        width: 25%;
+        font-size: 5rem;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        text-align: center;
+        background-image: linear-gradient(135deg, #2a64ff 20px, transparent 0),
+            linear-gradient(-45deg, #2a64ff 20px, transparent 0);
+        @include mq(){
+            width: 50%;
+            font-size: 2rem;
+            padding: 10px;
+        }
+    }
+    &-form{
+        width: 50%;
+        margin: 0 auto;
+        text-align: left;
+        @include mq(){
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    &-name{
+        width: 100%;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        @include mq(){
+            text-align: center;
+        }
+        &-box{
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            @include mq(){
+                width: 90%;
+                background: #f4f4f4;
+                padding: 10px;
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &-mail{
+        width: 100%;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        @include mq(){
+            text-align: center;
+        }
+        &-box{
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            @include mq(){
+                width: 90%;
+                background: #f4f4f4;
+                padding: 10px;
+                margin: 0 auto 20px;
+            }
+        }
+    }
+    &-select{
+        width: 100%;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        @include mq(){
+            text-align: center;
+        }
+        &-box{
+            width: 50%;
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            @include mq(){
+                width: 100%;
+                padding: 10px;
+                background: #f4f4f4;
+                margin-bottom: 20px;
+                border-style: solid;
+            }
+        }
+    }
+    &-text{
+        width: 100%;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        @include mq(){
+            text-align: center;
+        }
+        &-box{
+            width: 100%;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            padding: 10px;
+            @include mq(){
+                width: 90%;
+                height: 200px;
+                background: #f4f4f4;
+                padding: 10px;
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &-box{
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        &-submit{
+            width: 150px;
+            background: none;
+            font-size: 1.5rem;
+            padding: 10px;
+            border-style: solid;
+            box-shadow: 0 10px 8px rgb(193, 193, 193);
+            outline: 0;
+            @include mq(){
+                width: 90%;
+                background: #f4f4f4;
+                font-size: 1.5rem;
+                padding: 10px;
+                border-style: solid;
+                box-shadow: none;
+                outline: 0;
+            }
+            &:hover{
+                cursor: pointer;
+                transform: translateY(5px);
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+// footer
+.footer{
+    &-box{
+        display: flex;
+        justify-content: space-around;
+        @include mq(){
+            box-sizing: border-box;
+            display: block;
+        }
+    }
+    &-item-title{
+        font-size: 2rem;
+        padding-bottom: 10px;
+        margin-bottom: 40px;
+        border-bottom: 2px solid #fff;
+        text-align: center;
+        @include mq(){
+            font-size: 2.5rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: block;
+        }
+    }
+    &-item-lists .last{
+        margin-bottom: 50px;
+    }
+    &-item-list{
+        font-size: 1.7rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    &-copyright{
+        font-size: 1.9rem;
+        margin-right: 50px;
+        text-align: right;
+        @include mq(){
+            font-size: 1.5rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+    }
+}
