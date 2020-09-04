@@ -8,6 +8,6 @@
         "watch-css": "nodemon -e scss -x \"npm run build-css\""
     },
     "dependencies": {
-        "node-sass": "^4.12.0"
+        "node-sass": "^4.13.1"
     }
 }
